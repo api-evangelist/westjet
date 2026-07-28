@@ -1,0 +1,176 @@
+generated: '2026-07-28'
+method: derived
+source: >-
+  Derived from the evidence captured in review.yml (all URLs fetched 2026-07-28):
+  https://westjetndc.com/connection-options/, https://westjetndc.com/capabilities/,
+  https://westjetndc.com/benefits/, https://westjetndc.com/faq/,
+  https://westjettravelagents.com/policy-library/adm-policy/,
+  https://westjettravelagents.com/policy-library/ticketing-policy/,
+  https://westjet.mediaroom.com/2017-05-01-WestJet-receives-IATA-NDC-certification.
+  No OpenAPI, WSDL or XSD is published by WestJet, so nothing here is derived from
+  a machine-readable contract.
+description: >-
+  WestJet's conformance surface is almost entirely IATA airline-distribution
+  standards rather than web-API standards. The wire format for the Direct Connect
+  API is IATA NDC (schema 17.2 and 21.3/24.1) delivered on Accelya FLX/Farelogix;
+  settlement runs through IATA BSP and ARC; agency obligations are governed by
+  IATA Resolutions 824 and 850m. None of the common web-API conventions (OpenAPI,
+  OAuth 2.0 discovery, RFC 9457 problem details, RFC 8594 sunset headers) are
+  published, because no public machine-readable contract exists.
+standards:
+  - id: iata-ndc
+    name: IATA New Distribution Capability
+    conforms: true
+    versions:
+      - '17.2'
+      - 21.3/24.1
+    evidence: >-
+      westjetndc.com/connection-options/: "Travel partners with an existing user
+      interface and technical infrastructure can integrate directly with WestJet's
+      Direct Connect API. This option is available in versions 17.2 or 21.3/24.1."
+      The Direct Connect registration form's "NDC API Version" field offers
+      "NDC 17.2", "NDC 21.3/24.1" and "NDC SPRK (17.2)".
+    source: https://westjetndc.com/connection-options/
+  - id: iata-ndc-certification
+    name: IATA NDC Certification
+    conforms: true
+    level: Level 2
+    granted: '2017-03-22'
+    evidence: >-
+      WestJet newsroom: "On 22/03/2017, WestJet Airlines was granted 'NDC
+      Certification' Level 2 status". No higher level is claimed on westjetndc.com
+      or in any WestJet release located.
+    source: https://westjet.mediaroom.com/2017-05-01-WestJet-receives-IATA-NDC-certification
+  - id: iata-edifact
+    name: IATA/ATA EDIFACT (Type B / GDS messaging)
+    conforms: true
+    evidence: >-
+      westjetndc.com/benefits/ contrasts an "EDIFACT" channel column against the
+      "NDC (17.2 and 21.3/24.1)" columns; EDIFACT is the live agency interface in
+      Amadeus, Sabre and Travelport at review date.
+    source: https://westjetndc.com/benefits/
+  - id: iata-resolution-824
+    name: IATA Resolution 824 (Passenger Sales Agency Agreement)
+    conforms: true
+    evidence: >-
+      ADM policy: "Agency obligations are described in IATA Resolution 824, which
+      states that an Agent should issue tickets in compliance with Carrier's fares,
+      fare rules, general conditions of carriage and written instructions of the
+      carrier."
+    source: https://westjettravelagents.com/policy-library/adm-policy/
+  - id: iata-resolution-850m
+    name: IATA Resolution 850m (ADM audit and issuance)
+    conforms: true
+    evidence: >-
+      ADM policy: "The WestJet policy for audit and memo issuance will be handled
+      per IATA Resolution 850m."
+    source: https://westjettravelagents.com/policy-library/adm-policy/
+  - id: iata-bsp
+    name: IATA Billing and Settlement Plan (BSP / BSPLink)
+    conforms: true
+    evidence: >-
+      Capability matrix row "Settlement via BSP"; ADM disputes routed through
+      BSPLink (portal.iata.org) for Canadian and international agencies.
+    source: https://westjetndc.com/capabilities/
+  - id: arc-settlement
+    name: ARC settlement (Airlines Reporting Corporation / Memo Manager)
+    conforms: true
+    evidence: >-
+      Capability matrix row "Settlement via ARC"; US agency ADM disputes routed
+      through ARC Memo Manager (myarc.arccorp.com).
+    source: https://westjetndc.com/capabilities/
+  - id: iata-emd
+    name: IATA Electronic Miscellaneous Document (EMD-A)
+    conforms: true
+    evidence: >-
+      Capability matrix covers EMD-A issuance for bags and pre-reserved seats, and
+      a "View issued EMD details" read operation.
+    source: https://westjetndc.com/capabilities/
+  - id: atpco-category-31-33
+    name: ATPCO fare rule categories 31 (exchanges) and 33 (refunds)
+    conforms: true
+    evidence: >-
+      Capability matrix names "CAT 33 voluntary refunds"; the ticketing policy
+      references CAT 31 exchange handling.
+    source: https://westjetndc.com/capabilities/
+  - id: iata-ssr-osi
+    name: Special Service Request (SSR) / Other Service Information (OSI) codes
+    conforms: true
+    evidence: Capability matrix rows for SSR and OSI updates as servicing operations.
+    source: https://westjetndc.com/capabilities/
+  - id: tsa-secure-flight
+    name: TSA Secure Flight Passenger Data (incl. DHS Redress Control Number)
+    conforms: true
+    evidence: >-
+      The ticketing policy and agency documentation reference Secure Flight
+      Passenger Data and the 13-digit DHS Redress Control Number as carried
+      identifiers.
+    source: https://westjettravelagents.com/policy-library/ticketing-policy/
+  - id: iata-airline-designator
+    name: IATA airline designator and 3-digit accounting code
+    conforms: true
+    evidence: 'Airline designator WS (ICAO WJA); 838 ticket stock / accounting code.'
+    source: https://westjettravelagents.com/policy-library/ticketing-policy/
+  - id: openapi
+    name: OpenAPI Specification
+    conforms: false
+    evidence: >-
+      No OpenAPI or Swagger document is published. /openapi.json, /swagger.json and
+      /.well-known/openapi.json on www.westjet.com return HTTP 200 with a text/html
+      SPA soft-404, not a parseable spec; no developer/docs host resolves.
+  - id: wsdl-soap
+    name: WSDL / SOAP service description
+    conforms: false
+    evidence: >-
+      No WSDL or XSD is published for the Direct Connect API. The NDC XML schemas
+      are IATA artifacts distributed by IATA under its own terms, not by WestJet.
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: unknown
+    evidence: >-
+      No authentication mechanism for the Direct Connect API is publicly documented;
+      credentials are issued after an accreditation-gated application. No
+      /.well-known/oauth-authorization-server is served on any WestJet host.
+  - id: oidc
+    name: OpenID Connect Discovery
+    conforms: false
+    evidence: No /.well-known/openid-configuration is served on any WestJet host.
+  - id: rfc9457-problem-details
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      No error contract is published. NDC carries its own XML Errors/Warnings
+      structures inside the message payloads; no HTTP problem+json surface exists.
+  - id: rfc8594-sunset-header
+    name: RFC 8594 Sunset HTTP header
+    conforms: false
+    evidence: No deprecation or sunset header policy is published.
+  - id: rfc9116-security-txt
+    name: RFC 9116 security.txt
+    conforms: false
+    evidence: >-
+      /.well-known/security.txt on www.westjet.com returns HTTP 200 with a
+      text/html SPA soft-404; no security.txt is published.
+  - id: iata-one-record
+    name: IATA ONE Record (cargo data standard)
+    conforms: false
+    evidence: >-
+      westjetcargo.com publishes quote/track/claim web forms only; tracking is
+      delegated to the third-party SmartKargo platform. No ONE Record reference
+      was found.
+    source: https://www.westjetcargo.com/en-ca
+  - id: pipeda
+    name: PIPEDA (Personal Information Protection and Electronic Documents Act)
+    conforms: true
+    evidence: >-
+      WestJet operates a Canadian privacy-request programme — "For a copy of your
+      personal data, please request a Guest information report", plus a "Request to
+      be Forgotten" path, with verbal authentication of requesters. Implemented as a
+      web form and a phone call; no machine-readable export format is specified.
+    source: https://www.westjet.com/en-ca/legal/privacy-policy/privacy-requests
+notes: >-
+  This artifact asserts standards conformance only. It intentionally does NOT emit
+  a `Compliance` pointer: WestJet publishes no security or compliance certification
+  programme (no SOC 2, ISO 27001, PCI DSS or trust centre was found on any WestJet
+  host), and an industry NDC certification from 2017 is not a published compliance
+  posture.

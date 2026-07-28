@@ -1,0 +1,104 @@
+generated: '2026-07-28'
+method: searched
+source: https://westjetndc.com/release-notes/
+docs: https://westjetndc.com/release-notes/
+description: >-
+  WestJet publishes a dated release-notes page for its NDC platform, produced with
+  its technology partner Accelya. Each entry carries a "Release Version", an
+  "Effective date" and a "Feature area". The versions are Accelya FLX platform
+  release numbers (11.x), not API or NDC schema versions — the NDC schema versions
+  WestJet supports (17.2 and 21.3/24.1) are stated separately on the capabilities
+  and connection-options pages. No machine-readable changelog feed (RSS, JSON) is
+  published; this artifact captures the recent window, the live page is the source
+  of truth.
+page_last_modified: '2026-07-15'
+versioning:
+  scheme: platform release number
+  current: '11.7'
+  ndc_schema_versions:
+    - '17.2'
+    - 21.3/24.1
+  detail: lifecycle/westjet-lifecycle.yml
+entries:
+  - version: '11.7'
+    date: '2026-05-12'
+    latest: true
+    feature_area: Seats
+    title: Modernized pricing - Seats
+    breaking: []
+    additions:
+      - >-
+        NDC supports prepaid seat adjustments by applying targeted offers across
+        multiple attributes, which may include cabin, fare bundles,
+        origin-destination and aircraft type.
+      - >-
+        Offers support both amount and percentage-based adjustments and align with
+        pricing offered on WestJet direct channels including westjet.com and the
+        WestJet app.
+    highlights:
+      - >-
+        "New backend pricing logic runs behind the scenes while the existing user
+        flow remains unchanged, so the shopping and booking processes stay the same."
+  - version: '11.6'
+    date: '2026-02-24'
+    feature_area: Internal system enhancement
+    title: Internal system enhancement
+    breaking: []
+    additions: []
+    highlights:
+      - '"System enhancement. No external impact to users."'
+  - version: '11.5'
+    date: '2026-02-02'
+    feature_area: Involuntary exchange
+    title: Automated involuntary exchange
+    breaking: []
+    additions:
+      - >-
+        Involuntary exchange capabilities in NDC channels — re-shop for alternative
+        options in the event of a schedule change.
+      - >-
+        Automatic validation: eligible one-way, round-trip, multi-city, open-jaw and
+        partially flown itineraries are processed as even exchanges with no penalty.
+      - >-
+        Streamlined servicing: accept the schedule change or re-shop for alternative
+        options.
+  - version: '11.4'
+    date: '2025-11-06'
+    date_as_published: November 6, 2026
+    feature_area: Bug fix
+    title: Bug fix
+    breaking: []
+    additions: []
+    highlights:
+      - '"Defects were resolved to enhance overall system performance."'
+    note: >-
+      The page prints "Effective date: November 6, 2026" for 11.4 while listing it
+      below 11.5 (February 2, 2026) and above 11.3 (September 2, 2025). The published
+      string is preserved in date_as_published; the ordered date is recorded as
+      2025-11-06 to match the sequence on the page. Not independently confirmed.
+  - version: '11.3'
+    date: '2025-09-02'
+    feature_area: True Reshop, voluntary exchange, pre-paid bags
+    title: True Reshop, CAT31 automated voluntary exchanges, pre-paid bags
+    breaking: []
+    additions:
+      - >-
+        Bags — NDC API users can prepay for the first and second checked bags in
+        WestJet NDC-enabled channels, directly in both the NDC API and SPRK booking
+        flows rather than being directed to Manage Trips post-booking.
+      - >-
+        True Reshop — fully explore all available market offers when changing an
+        existing booking, beyond the limitations of the original order.
+      - >-
+        Category 31 automated voluntary exchanges, fully compatible with True Reshop.
+    highlights:
+      - Supports one-way, round-trip, open jaw, point-to-point and multi-city itineraries
+      - Returns the best available option within each fare brand
+      - Applies discounted fares (corporate ID, promo codes, private fares) during re-shopping
+      - Supports up to three exchanges per booking
+      - Modify unused segments on partially flown tickets; add new flights to an existing itinerary
+      - Switch between round-trip and one-way itineraries; limit offers to private, public or both
+related:
+  news: https://westjetndc.com/news/
+  capabilities_matrix: https://westjetndc.com/capabilities/
+  faq: https://westjetndc.com/faq/

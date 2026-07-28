@@ -1,0 +1,43 @@
+generated: '2026-07-28'
+method: searched
+source: >-
+  Registry sweeps run 2026-07-28 against npm, PyPI, RubyGems, NuGet and Packagist,
+  plus the WestJet NDC hub (westjetndc.com), westjettravelagents.com and a GitHub
+  org search.
+description: >-
+  WestJet ships no client libraries. There is no first-party SDK in any public
+  package registry, no GitHub organisation with public repositories, and no code
+  sample or reference implementation on the NDC hub. Direct Connect partners
+  integrate against the IATA NDC XML message set themselves, or use a technology
+  partner (Amadeus, Sabre, Travelport, Travelfusion) or the Accelya SPRK web
+  portal. This artifact records the negative result so re-runs do not repeat the
+  sweep.
+packages: []
+official_sdk_count: 0
+registries_probed:
+  - registry: npm
+    query: westjet
+    result: >-
+      1 unrelated third-party result (airline-codes, IATA code data from
+      OpenFlights). No WestJet-published package.
+  - registry: pypi
+    query: westjet
+    result: HTTP 404 — no package named westjet
+  - registry: rubygems
+    query: westjet
+    result: empty result set
+  - registry: nuget
+    query: westjet
+    result: totalHits 0
+  - registry: packagist
+    query: westjet
+    result: total 0
+  - registry: github
+    query: 'westjet type:org'
+    result: >-
+      https://api.github.com/orgs/westjet returns HTTP 404. Seven look-alike orgs
+      exist (westjet-old, WestJet-Dev-old, WestJet-Prod, WestJet-Digital-eComm,
+      WestjetIT, westjet-IT, westjet-fpa); every one reports public_repos = 0.
+notes: >-
+  No `SDKs` pointer is emitted in apis.yml, because no official client library
+  exists to point at.

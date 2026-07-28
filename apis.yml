@@ -72,15 +72,43 @@ apis:
     url: https://westjetndc.com/benefits/
   - type: Documentation
     url: https://westjetndc.com/faq/
-  - type: Signup
+  - type: SignUp
     url: https://westjetndc.com/direct-connect/
+  - type: GettingStarted
+    url: https://westjetndc.com/connection-options/
   - type: Support
     url: https://westjetndc.com/technical-support/
   - type: StatusPage
     url: https://accelyastatus.statuspage.io/
+  - type: Roadmap
+    url: https://westjetndc.com/capabilities/
   - type: ChangeLog
     url: https://westjetndc.com/release-notes/
+  - type: Webhooks
+    url: asyncapi/westjet-ndc-notifications.yml
 common:
+- type: DomainSecurity
+  url: security/westjet-domain-security.yml
+- type: Conformance
+  url: conformance/westjet-conformance.yml
+- type: Lifecycle
+  url: lifecycle/westjet-lifecycle.yml
+- type: StatusPage
+  url: https://accelyastatus.statuspage.io/
+- type: Roadmap
+  url: https://westjetndc.com/capabilities/
+- type: GettingStarted
+  url: https://westjetndc.com/connection-options/
+- type: ChangeLog
+  url: https://westjetndc.com/release-notes/
+- type: ChangeLog
+  url: changelog/westjet-changelog.yml
+- type: Webhooks
+  url: asyncapi/westjet-ndc-notifications.yml
+- type: Packages
+  url: packages/westjet-packages.yml
+- type: Blog
+  url: https://westjetndc.com/news/
 - type: Website
   url: https://www.westjet.com/
 - type: Portal
@@ -101,7 +129,7 @@ common:
   url: https://www.westjet.com/en-ca/legal/privacy-policy/privacy-requests
 - type: Login
   url: https://westjetagentdirect.westjet.com/login-agent.html
-- type: Signup
+- type: SignUp
   url: https://westjetagentdirect.westjet.com/registeragency.html
 - type: Login
   url: https://agents.westjetvacations.com/
@@ -113,6 +141,8 @@ common:
   url: https://www.westjetvacations.com/en/
 - type: LLMsTxt
   url: https://www.westjet.com/llms.txt
+- type: LLMsTxt
+  url: llms/westjet-llms.txt
 - type: LinkedIn
   url: https://www.linkedin.com/company/westjet
 - type: Newsroom

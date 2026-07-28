@@ -1,0 +1,114 @@
+generated: '2026-07-28'
+method: searched
+description: >-
+  Results of probing the /.well-known/ discovery surface across every WestJet host
+  in apis.yml plus the API host (api.westjet.com), the Accelya-hosted NDC portal
+  and the SmartKargo cargo host. Status is the HTTP code observed at fetch time on
+  2026-07-28. NOTHING was found: no security.txt, no OIDC or OAuth discovery
+  document, no api-catalog, no ai-plugin. Several hosts answer 200 or 404 with a
+  text/html soft-404 page rather than a real document; those are recorded as
+  present-but-not-a-real-document and nothing was saved.
+hosts:
+  - host: https://www.westjet.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        type: text/html
+        note: Server 404 page, not a security.txt
+      - path: /.well-known/openid-configuration
+        status: 404
+        type: text/html
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        type: text/html
+      - path: /.well-known/api-catalog
+        status: 404
+        type: text/html
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        type: text/html
+      - path: /.well-known/apple-app-site-association
+        status: 200
+        type: application/json
+        note: >-
+          A real universal-links file for the WestJet mobile app. Mobile deep-link
+          routing, not an API contract — not saved and not wired as a pointer.
+      - path: /llms.txt
+        status: 200
+        type: text/plain
+        bytes: 8091
+        file: ../llms/westjet-llms.txt
+        note: Real llms.txt, saved verbatim to llms/westjet-llms.txt
+  - host: https://westjetndc.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        type: text/html
+      - path: /.well-known/openid-configuration
+        status: 404
+        type: text/html
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        type: text/html
+      - path: /.well-known/api-catalog
+        status: 404
+        type: text/html
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        type: text/html
+      - path: /llms.txt
+        status: 404
+        type: text/html
+  - host: https://api.westjet.com
+    note: >-
+      Every path on this host returns HTTP 500 with content-type application/json
+      and a zero-byte body — including /, /openapi.json, /swagger.json, /api-docs,
+      /docs, /graphql and both /.well-known/ OAuth paths. No discoverable surface.
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 500
+      - path: /.well-known/oauth-authorization-server
+        status: 500
+  - host: https://westjettravelagents.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        type: text/html
+      - path: /llms.txt
+        status: 404
+        type: text/html
+  - host: https://westjetagentdirect.westjet.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 403
+        note: Host refuses anonymous requests outside the login pages
+  - host: https://www.westjetcargo.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        type: text/html
+        note: SPA soft-404 ("Oops!" page), not a security.txt
+  - host: https://westjet.smartkargo.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+  - host: https://sprk.accelya.io
+    note: >-
+      Third-party host (Accelya SPRK portal). Both OAuth/OIDC discovery paths
+      returned HTTP 503 at probe time.
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 503
+      - path: /.well-known/oauth-authorization-server
+        status: 503
+pointer_note: >-
+  No `WellKnown` pointer is emitted in apis.yml. Every probe missed, so there is no
+  /.well-known/ discovery surface to point at; this file records the negative sweep
+  so a later round does not repeat it.
+summary:
+  security_txt: false
+  openid_configuration: false
+  oauth_authorization_server: false
+  api_catalog: false
+  ai_plugin: false
+  llms_txt: true

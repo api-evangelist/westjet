@@ -1,0 +1,57 @@
+generated: '2026-07-28'
+method: searched
+source: https://westjetndc.com/capabilities/
+spec_type: none
+description: >-
+  WestJet publishes NO AsyncAPI document and no event schema. It does advertise one
+  asynchronous, carrier-to-seller notification capability on the Direct Connect API:
+  "Schedule change notifications (OCN)" — the IATA NDC OrderChangeNotification
+  message. This artifact records that event surface as advertised in the public
+  capability matrix. No endpoint, subscription mechanism, delivery guarantee,
+  retry policy, payload schema or signature scheme is published; the message shape
+  is defined by the IATA NDC schema (17.2 / 21.3/24.1), which IATA distributes, not
+  WestJet. Nothing here is derived from a machine-readable contract because none
+  exists.
+delivery_model: >-
+  Carrier-push asynchronous notification within the NDC message set (IATA NDC
+  OrderChangeNotification), not an HTTP webhook with a subscriber-registered
+  callback URL. WestJet publishes no registration or callback configuration.
+capability_matrix_last_updated: '2026-07-15'
+events:
+  - name: Schedule change notification
+    iata_message: OrderChangeNotification (OCN)
+    category: Change notifications
+    trigger: A schedule change is applied to an existing order
+    advertised_on:
+      - channel: WestJet Direct Connect
+        status: supported
+      - channel: WestJet portal (SPRK 17.2)
+        status: supported
+      - channel: Amadeus
+        status: Q3 2026
+      - channel: Sabre
+        status: supported
+      - channel: Travelport
+        status: Q3 2026
+      - channel: Travelfusion
+        status: Q3 2026
+    evidence: >-
+      westjetndc.com/capabilities/ — "Change notifications" section, row
+      "Schedule change notifications (OCN)".
+    payload_schema: not published
+    subscription: not published
+    security: not published
+related_servicing_flow:
+  description: >-
+    The notification is the entry point to the automated involuntary exchange flow
+    shipped in platform release 11.5 (effective 2026-02-02): "With involuntary
+    exchange capabilities in NDC channels, you can re-shop for alternative options
+    in the event of a schedule change… You can choose to accept the schedule change
+    or re-shop for alternative options."
+  source: https://westjetndc.com/release-notes/
+  changelog: changelog/westjet-changelog.yml
+gaps:
+  - No AsyncAPI, XSD or JSON Schema published for the notification payload
+  - No subscription, callback-registration or replay/retry documentation
+  - No signature, authentication or delivery-guarantee statement
+  - No event catalogue beyond the single OCN row in the capability matrix

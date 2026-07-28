@@ -1,0 +1,92 @@
+generated: '2026-07-28'
+method: searched
+source: >-
+  https://westjetndc.com/connection-options/, https://westjetndc.com/capabilities/,
+  https://westjetndc.com/benefits/, https://westjetndc.com/faq/,
+  https://westjetndc.com/release-notes/, https://westjetndc.com/technical-support/,
+  https://accelyastatus.statuspage.io/ — all fetched 2026-07-28.
+description: >-
+  Lifecycle posture for the WestJet Direct Connect (NDC) API. WestJet versions the
+  interface by IATA NDC schema version, and versions the underlying platform by
+  Accelya FLX release number (11.x, published on the release-notes page). The API
+  is pre-launch at review date: WestJet states a Q4 2026 rollout. There is no
+  published deprecation policy, no RFC 8594 Sunset/Deprecation header commitment,
+  and no public SLA or uptime target. Status and incident communication is
+  delegated to Accelya's status page, and API monitoring is available only to
+  enrolled Direct Connect users.
+versioning:
+  scheme: standard-schema-version
+  mechanism: >-
+    Partners select an IATA NDC schema version at enrolment; the Direct Connect
+    registration form's "NDC API Version" field offers "NDC 17.2",
+    "NDC 21.3/24.1" and "NDC SPRK (17.2)".
+  supported:
+    - '17.2'
+    - 21.3/24.1
+  docs: https://westjetndc.com/connection-options/
+  platform_release_scheme: Accelya FLX release number (current 11.7, effective 2026-05-12)
+  platform_release_docs: https://westjetndc.com/release-notes/
+  notes: >-
+    Capability is not uniform across schema version or channel — the published
+    matrix shows "Book and instant ticket" supported only on WestJet Direct
+    Connect, and "Multiple forms of payment" only on Direct Connect and SPRK.
+    The same NDC version does not buy the same behaviour from a different channel.
+launch_status:
+  state: pre-launch
+  planned_rollout: Q4 2026
+  evidence: >-
+    FAQ: "We intend to roll out NDC in Q4 of 2026. Once live, we will have NDC
+    connectivity with the three largest GDS platforms WestJet works with today
+    (Amadeus, Sabre and Travelport), aggregators like TravelFusion and a direct
+    connect option."
+  source: https://westjetndc.com/faq/
+  testing: >-
+    FAQ: "we're in the process of testing functionality and product enhancements
+    with a specialist third-party company and a closed group of test partner
+    agencies." No public sandbox, test credentials or self-serve trial exists.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  published: false
+  notes: >-
+    No deprecation or sunset policy is published for the Direct Connect API. The
+    nearest published lifecycle signal is commercial rather than technical: a
+    Distribution Cost Recovery (DCR) fee of $20-$22 USD will apply to non-NDC
+    (EDIFACT) bookings on the lowest class per cabin in markets where NDC content
+    is available, and UltraBasic fares will be available exclusively through NDC
+    channels. That prices the legacy channel down without formally deprecating it.
+  channel_transition_evidence: https://westjetndc.com/benefits/
+sla:
+  url: null
+  uptime_target: null
+  published: false
+  notes: >-
+    No SLA, uptime target or rate-limit commitment is published for the Direct
+    Connect API. Nothing was found in the public trade policy library either.
+status_page:
+  url: https://accelyastatus.statuspage.io/
+  operator: Accelya (the platform vendor), not WestJet
+  access: >-
+    technical-support page: "Direct Connect users can access updates on our API
+    platform. Note: This is not available for technology partner users at this
+    time."
+  subscribe: true
+  source: https://westjetndc.com/technical-support/
+roadmap:
+  url: https://westjetndc.com/capabilities/
+  published: true
+  evidence: >-
+    FAQ links the capabilities matrix as the product roadmap — "To find the latest
+    WestJet-supported NDC capabilities, please refer to our product roadmap." The
+    matrix carries dated future capability (Q3 2026 and Q4 2026 markers per channel)
+    alongside what is live today.
+  last_updated: '2026-07-15'
+support:
+  direct_connect: https://farelogixpartnersupport.zendesk.com/hc/en-us
+  direct_connect_access: credentialled partners only (HTTP 403 anonymously)
+  technology_partners: contact the GDS or aggregator directly
+  general: https://westjetndc.com/technical-support/
+deprecated_operations: []
+deprecated_operations_note: >-
+  Not derivable — WestJet publishes no OpenAPI, WSDL or XSD, so there is no
+  machine-readable operation set to read deprecation flags from.
