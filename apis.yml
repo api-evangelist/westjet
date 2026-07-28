@@ -1,0 +1,126 @@
+aid: westjet
+url: https://raw.githubusercontent.com/api-evangelist/westjet/refs/heads/main/apis.yml
+name: WestJet
+kind: company
+description: >-
+  WestJet Airlines Ltd. is Canada's second-largest air carrier, headquartered in
+  Calgary, Alberta, operating scheduled passenger service to more than 100
+  destinations across Canada, the United States, Mexico, Central America, the
+  Caribbean, Europe and Asia, alongside WestJet Encore, WestJet Vacations,
+  WestJet Cargo and the Sunwing Vacations Group. In the distribution chain
+  WestJet sits upstream of the agency channel: its inventory reaches travel
+  sellers today through EDIFACT in the Amadeus, Sabre and Travelport GDSs, and
+  it is standing up an IATA NDC surface (schema 17.2 and 21.3/24.1) built and
+  hosted on Accelya's FLX/Farelogix platform, with a stated Q4 2026 rollout. Its
+  API posture is honest but closed: there is no public developer portal, no
+  self-serve signup, no OpenAPI or WSDL and no consumer API. The WestJet
+  Direct Connect API is documented only as a public capability matrix at
+  westjetndc.com, and access requires an IATA or ARC accreditation number (TIDS
+  is explicitly not supported), a business-type and sales-volume qualification
+  form, and WestJet approval. Agency booking through WestJet Agent Direct
+  likewise requires an IATA/TIDS/ARC number and a five-to-ten business day
+  review. There is no bulk export for agency or booking data; guest data comes
+  out only via a verbally authenticated PIPEDA-style "Guest information report"
+  request.
+image: https://www.westjet.com/favicon.ico
+tags:
+- Travel
+- Canada
+- Aviation
+- Airline
+- Distribution
+- NDC
+- Booking
+- Cargo
+- Loyalty
+created: '2026-07-28'
+modified: '2026-07-28'
+specificationVersion: '0.19'
+apis:
+- aid: westjet:westjet-direct-connect-api
+  name: WestJet Direct Connect API
+  description: >-
+    WestJet's IATA New Distribution Capability (NDC) direct-connect interface for
+    travel sellers, offered in NDC schema versions 17.2 and 21.3/24.1 and
+    delivered on Accelya's FLX/Farelogix platform. Published capability tables
+    cover shopping (fare brands, fare types, complex itineraries, promo codes),
+    ancillaries (EMD-A for bags and pre-reserved seats, seat maps), order
+    creation (book-and-hold, book-and-instant-ticket), payment and ticketing
+    (credit/debit, BSP and ARC cash, UATP, multiple forms of payment), settlement
+    via BSP and ARC, change notifications (OCN), and servicing (CAT 33 voluntary
+    refunds, True Reshop, waiver codes, split/divide PNR, SSR and OSI updates).
+    No OpenAPI, WSDL, XSD or base URL is published; enrolment is by application
+    and requires an IATA or ARC accreditation number. WestJet states a Q4 2026
+    rollout, with a $20-$22 USD Distribution Cost Recovery surcharge applying to
+    non-NDC (EDIFACT) bookings on the lowest class per cabin in NDC-enabled
+    points of sale.
+  humanURL: https://westjetndc.com/connection-options/
+  tags:
+  - NDC
+  - Distribution
+  - Airline
+  - Booking
+  - Travel
+  properties:
+  - type: Documentation
+    url: https://westjetndc.com/
+  - type: Documentation
+    url: https://westjetndc.com/connection-options/
+  - type: Documentation
+    url: https://westjetndc.com/capabilities/
+  - type: Documentation
+    url: https://westjetndc.com/benefits/
+  - type: Documentation
+    url: https://westjetndc.com/faq/
+  - type: Signup
+    url: https://westjetndc.com/direct-connect/
+  - type: Support
+    url: https://westjetndc.com/technical-support/
+  - type: StatusPage
+    url: https://accelyastatus.statuspage.io/
+  - type: ChangeLog
+    url: https://westjetndc.com/release-notes/
+common:
+- type: Website
+  url: https://www.westjet.com/
+- type: Portal
+  url: https://westjetndc.com/
+- type: Documentation
+  url: https://westjetndc.com/capabilities/
+- type: TravelAgentResources
+  url: https://westjettravelagents.com/
+- type: PolicyLibrary
+  url: https://westjettravelagents.com/policy-library/
+- type: TermsOfService
+  url: https://westjettravelagents.com/policy-library/ticketing-policy/
+- type: TermsOfService
+  url: https://www.westjet.com/en-ca/legal/terms-use
+- type: PrivacyPolicy
+  url: https://www.westjet.com/en-ca/legal/privacy-policy
+- type: DataPortability
+  url: https://www.westjet.com/en-ca/legal/privacy-policy/privacy-requests
+- type: Login
+  url: https://westjetagentdirect.westjet.com/login-agent.html
+- type: Signup
+  url: https://westjetagentdirect.westjet.com/registeragency.html
+- type: Login
+  url: https://agents.westjetvacations.com/
+- type: Cargo
+  url: https://www.westjetcargo.com/en-ca
+- type: BusinessTravel
+  url: https://westjetbusinesstravel.com/
+- type: Vacations
+  url: https://www.westjetvacations.com/en/
+- type: LLMsTxt
+  url: https://www.westjet.com/llms.txt
+- type: LinkedIn
+  url: https://www.linkedin.com/company/westjet
+- type: Newsroom
+  url: https://www.westjet.com/en-ca/news
+- type: PressRoom
+  url: https://westjet.mediaroom.com/
+- type: Support
+  url: https://www.westjet.com/en-ca/contact
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

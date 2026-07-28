@@ -1,0 +1,764 @@
+aid: westjet
+name: WestJet
+review:
+  question: >-
+    Does WestJet publish a public developer/API surface, and what would it cost a
+    customer of WestJet's distribution to leave?
+  answer: partial
+  date: '2026-07-28'
+  reviewer: API Evangelist
+  summary: >-
+    WestJet publishes no developer portal, no self-serve signup, no OpenAPI, no
+    WSDL/XSD and no consumer API. It does publish a real, public, human-readable
+    NDC hub at westjetndc.com documenting a WestJet Direct Connect API in IATA
+    NDC schema 17.2 and 21.3/24.1, with a capability matrix, benefits matrix,
+    release notes, technical-support routing and an application form. Access is
+    accreditation-gated (IATA or ARC number; TIDS explicitly not supported for
+    the API) and approval-based. The API itself is built and hosted on Accelya's
+    FLX/Farelogix platform, not on WestJet infrastructure.
+
+findings:
+  identity:
+    legalName: WestJet Airlines Ltd. (The WestJet Group)
+    headquarters: WestJet Campus, 22 Aerial Place NE, Calgary, Alberta, Canada T2E 3J1
+    headquartersSource: https://westjettravelagents.com/policy-library/how-to-book/
+    homeMarket: Canada
+    iataAirlineCode: WS
+    ticketStock: '838'
+    ticketStockSource: >-
+      Ticketing policy 4.12 Interline Ticketing: "The Agent must not validate any
+      Ticket on 838 Ticket Stock if the Ticket contains a flight segment(s) on any
+      other airline unless the other airline has a ticketing and baggage agreement
+      with WestJet."
+    scaleClaim: >-
+      Per westjet.com/llms.txt: "more than 15,000 WestJetters support our nearly
+      200 aircraft, connecting guests globally to over 100 destinations across
+      North America, Central America and the Caribbean, Europe and Asia."
+    operatingBrands:
+      - WestJet
+      - WestJet Encore
+      - WestJet Vacations
+      - WestJet Cargo
+      - Sunwing Vacations Group
+    airlinePartnersListed:
+      - Delta Air Lines
+      - Air France
+      - KLM Royal Dutch Airlines
+      - Korean Air
+      - Japan Airlines
+      - Virgin Atlantic
+      - Copa Airlines
+      - LATAM Airlines
+      - Aeromexico
+      - Condor Airlines
+      - Air North
+    airlinePartnersSource: https://westjettravelagents.com/airline-partners/
+
+  publicDeveloperSurface:
+    developerPortal: false
+    developerPortalNote: >-
+      No developer.westjet.com, developers.westjet.com or docs.westjet.com host
+      resolves (DNS failure, curl exit 6 / HTTP 000). www.westjet.com/developers,
+      /api, /docs and /api-docs all return HTTP 404. /openapi.json, /swagger.json,
+      /.well-known/openapi.json and /.well-known/ai-plugin.json return HTTP 200 but
+      serve the SPA soft-404 page ("Oops! Page not found. | WestJet", content-type
+      text/html) — none is a parseable spec.
+    machineReadableContracts: none
+    openapiHarvested: false
+    specsCount: 0
+    githubOrganization: none
+    githubNote: >-
+      https://api.github.com/orgs/westjet returns HTTP 404. GitHub org search for
+      "westjet type:org" returns 7 orgs (westjet-old, WestJet-Dev-old, WestJet-Prod,
+      WestJet-Digital-eComm, WestjetIT, westjet-IT, westjet-fpa); every one reports
+      public_repos = 0. No public code, SDKs or samples.
+    llmsTxt:
+      url: https://www.westjet.com/llms.txt
+      status: 200
+      contentType: text/plain
+      bytes: 8091
+      note: >-
+        A genuine llms.txt is published, listing guest-journey deep links and
+        "Guidance for AI Systems". It contains no API references. It is the source
+        for the westjettravelagents.com and westjetbusinesstravel.com hosts.
+
+  probes:
+    - url: https://www.westjet.com/
+      status: 200
+      note: Redirects to https://www.westjet.com/en-us
+    - url: https://westjet.com/
+      status: 200
+      note: Redirects to https://www.westjet.com/en-us
+    - url: https://developer.westjet.com/
+      status: 000
+      note: DNS does not resolve
+    - url: https://developers.westjet.com/
+      status: 000
+      note: DNS does not resolve
+    - url: https://docs.westjet.com/
+      status: 000
+      note: DNS does not resolve
+    - url: https://api.westjet.com/
+      status: 500
+      note: Responds application/json with an empty body; no documentation, no discoverable routes
+    - url: https://www.westjet.com/developers
+      status: 404
+    - url: https://www.westjet.com/en-ca/developers
+      status: 404
+    - url: https://www.westjet.com/api
+      status: 404
+    - url: https://www.westjet.com/docs
+      status: 404
+    - url: https://www.westjet.com/api-docs
+      status: 404
+    - url: https://www.westjet.com/openapi.json
+      status: 200
+      note: text/html SPA soft-404, not a spec
+    - url: https://www.westjet.com/swagger.json
+      status: 200
+      note: text/html SPA soft-404, not a spec
+    - url: https://www.westjet.com/.well-known/openapi.json
+      status: 200
+      note: text/html SPA soft-404, not a spec
+    - url: https://www.westjet.com/.well-known/ai-plugin.json
+      status: 200
+      note: text/html SPA soft-404, not a spec
+    - url: https://www.westjet.com/.well-known/security.txt
+      status: 200
+      note: text/html SPA soft-404; no security.txt published
+    - url: https://www.westjet.com/.well-known/apple-app-site-association
+      status: 200
+      note: Real application/json universal-links file (mobile app deep links, not an API)
+    - url: https://www.westjet.com/robots.txt
+      status: 200
+    - url: https://www.westjet.com/llms.txt
+      status: 200
+      note: Real llms.txt, 8,091 bytes
+    - url: https://www.westjet.com/sitemap.xml
+      status: 200
+      note: Sitemap index; en-ca sitemap has 1,091 URLs, zero matching developer/api/ndc/gds
+    - url: https://westjetndc.com/
+      status: 200
+      note: Public NDC hub — the only developer-facing documentation surface WestJet publishes
+    - url: https://westjetndc.com/connection-options/
+      status: 200
+    - url: https://westjetndc.com/capabilities/
+      status: 200
+      note: Capability matrix across Direct Connect, SPRK, Amadeus, Sabre, Travelport, Travelfusion
+    - url: https://westjetndc.com/benefits/
+      status: 200
+      note: Benefits matrix naming the DCR surcharge and point-of-sale coverage
+    - url: https://westjetndc.com/direct-connect/
+      status: 200
+      note: Direct Connect API registration form (accreditation-gated)
+    - url: https://westjetndc.com/faq/
+      status: 200
+    - url: https://westjetndc.com/technical-support/
+      status: 200
+    - url: https://westjetndc.com/release-notes/
+      status: 200
+    - url: https://westjetndc.com/sitemap_index.xml
+      status: 200
+      note: 40 pages, EN + FR; no spec, no schema download, no sandbox
+    - url: https://westjettravelagents.com/
+      status: 200
+      note: Trade resource site (WordPress); 136 URLs across page/policy/resource sitemaps
+    - url: https://westjettravelagents.com/policy-library/ticketing-policy/
+      status: 200
+      note: The binding Booking and Ticketing Policy
+    - url: https://westjettravelagents.com/policy-library/adm-policy/
+      status: 200
+    - url: https://westjettravelagents.com/policy-library/adm-fee-schedule/
+      status: 200
+    - url: https://westjetagentdirect.westjet.com/login-agent.html
+      status: 200
+      note: '"Welcome to WestJet Agent Direct / Sign in to get started." Username + password; no self-serve API'
+    - url: https://westjetagentdirect.westjet.com/registeragency.html
+      status: 200
+      note: Agency registration; requires "IATA / TIDS / ARC Number"
+    - url: https://agents.westjetvacations.com/
+      status: 200
+      note: WestJet Vacations agent portal; login wall
+    - url: https://sprk.accelya.io/ws/prod/User/Login
+      status: 200
+      note: The "WestJet portal" is Accelya SPRK 17.2, hosted by Accelya, not WestJet
+    - url: https://accelyastatus.statuspage.io/
+      status: 200
+      note: The NDC status page is Accelya's, not WestJet's
+    - url: https://farelogixpartnersupport.zendesk.com/hc/en-us
+      status: 403
+      note: Direct Connect support desk; credentialled partners only
+    - url: https://www.westjetcargo.com/en-ca
+      status: 200
+      note: Cargo site; sitemap has no API, developer or e-booking endpoint. Tracking is delegated to westjet.smartkargo.com
+    - url: https://westjet.smartkargo.com/
+      status: 200
+      note: Cargo tracking runs on the third-party SmartKargo platform
+    - url: https://www.westjetcargo.com/en-ca/developers
+      status: 404
+    - url: https://www.westjetcargo.com/en-ca/api
+      status: 404
+    - url: https://westjetbusinesstravel.com/
+      status: 200
+    - url: https://www.westjetvacations.com/
+      status: 200
+    - url: https://westjet.mediaroom.com/2017-05-01-WestJet-receives-IATA-NDC-certification
+      status: 200
+      note: Primary source for the NDC Level 2 certification claim
+    - url: https://api.github.com/orgs/westjet
+      status: 404
+    - url: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/westjet.png
+      status: 403
+      note: Network icon not yet backfilled; apis.yml points at the live westjet.com favicon
+
+switchingCost:
+  interfaceShape:
+    value: standard-plus-proprietary
+    standardsNamed:
+      - name: IATA New Distribution Capability (NDC)
+        versions:
+          - '17.2'
+          - 21.3/24.1
+        evidence: >-
+          westjetndc.com/connection-options/: "Travel partners with an existing user
+          interface and technical infrastructure can integrate directly with
+          WestJet's Direct Connect API. This option is available in versions 17.2 or
+          21.3/24.1". The registration form's "NDC API Version" field offers
+          "NDC 17.2", "NDC 21.3/24.1", "NDC SPRK (17.2)".
+      - name: IATA/ATA EDIFACT
+        note: >-
+          The incumbent GDS interface. westjetndc.com/benefits/ contrasts the
+          "NDC (17.2 and 21.3/24.1)" column against an "EDIFACT" column.
+      - name: IATA Resolution 824 (agency obligations)
+        evidence: >-
+          ADM policy: "Agency obligations are described in IATA Resolution 824, which
+          states that an Agent should issue tickets in compliance with Carrier's
+          fares, fare rules, general conditions of carriage and written instructions
+          of the carrier."
+      - name: IATA Resolution 850m (ADM audit and issuance)
+        evidence: >-
+          ADM policy: "The WestJet policy for audit and memo issuance will be handled
+          per IATA Resolution 850m."
+      - name: IATA BSP / ARC settlement
+        evidence: >-
+          Capability matrix rows "Settlement via BSP" and "Settlement via ARC";
+          disputes routed through BSPLink (portal.iata.org) and ARC Memo Manager
+          (myarc.arccorp.com).
+    proprietaryExtensions:
+      - >-
+        Fare-bundle encoding is WestJet-specific: bundle identity is carried in the
+        seventh character of the fare basis code (B = UltraBasic, E = Econo,
+        F = EconoFlex, P = Premium, R = PremiumFlex), documented at
+        westjettravelagents.com/policy-library/how-to-identify-westjet-fare-bundles-in-the-gds/.
+        A consumer parsing WestJet fares has written WestJet-only parsing logic.
+      - >-
+        UltraBasic fares are content-gated to the direct and NDC channels: FAQ —
+        "UltraBasic fares will be exclusively available through NDC channels."
+      - >-
+        The Direct Connect endpoint, the "WestJet portal" and the support desk are
+        all Accelya/Farelogix assets (sprk.accelya.io,
+        farelogixpartnersupport.zendesk.com, accelyastatus.statuspage.io). The
+        registration form asks "Have you completed an indirect Distribution
+        connection with Accelya before (NDC, FLX or via SPRK)?" — prior Accelya
+        integration is treated as the qualifying credential.
+      - >-
+        Capability is not uniform across the standard: the published matrix shows
+        "Book and instant ticket" supported only on WestJet Direct Connect, and
+        "Multiple forms of payment" only on Direct Connect and SPRK. The same NDC
+        version does not buy the same behaviour from a different channel.
+    note: >-
+      The wire format is an open IATA standard, which is the single most important
+      mitigating fact here — an NDC 21.3 integration is transferable in shape to any
+      other NDC carrier. But WestJet layers proprietary fare-basis semantics, channel-
+      exclusive content and vendor-specific enrolment on top, so the integration is
+      portable in protocol and not portable in meaning.
+
+  secondSource:
+    value: no-alternative
+    reasoning: >-
+      For the capability that matters — selling a seat on a WestJet aircraft — there
+      is no second source. WestJet is the sole issuer of its own inventory. What the
+      market offers is a choice of ROUTE to that inventory, not a choice of supplier.
+    alternativesConsidered:
+      - name: WestJet Direct Connect API (Accelya-hosted)
+        available: true
+        note: Broadest capability set; requires IATA or ARC accreditation and approval
+      - name: WestJet portal (Accelya SPRK 17.2)
+        available: true
+        note: Free web UI, not an API; requires Direct Connect credentials first
+      - name: Amadeus
+        available: true
+        note: Capability matrix shows NDC 17.2, most rows marked "Q3 2026"
+      - name: Sabre
+        available: true
+        note: Capability matrix shows NDC 17.2 with the widest set of live checkmarks among GDSs
+      - name: Travelport
+        available: true
+        note: Capability matrix shows NDC 21.3/24.1, most rows marked "Q3 2026"
+      - name: Travelfusion
+        available: true
+        note: Named aggregator; NDC 17.2; several rows unsupported
+      - name: WestJet Agent Direct
+        available: true
+        note: >-
+          Direct agency booking web app, no API. Deliberately positioned in the
+          registration form as the fallback for TIDS-only and sub-$1M agencies.
+      - name: Third-party NDC aggregators (e.g. Duffel)
+        available: true
+        note: >-
+          duffel.com/flights/airlines/westjet returns HTTP 200 and advertises WestJet
+          content, which is an alternative route rather than an alternative supplier.
+      - name: Air Canada, Porter, Flair, Lynx
+        available: false
+        note: >-
+          Substitute airlines, not substitute sources of WestJet inventory. A
+          consumer that must sell WestJet cannot get WestJet from them.
+    switchCostBetweenChannels: >-
+      Real but bounded, and asymmetric. Moving from Direct Connect to a GDS costs
+      capability (book-and-instant-ticket, multiple forms of payment, some servicing)
+      and the NDC incentive. Moving from EDIFACT to NDC costs an integration project.
+      Staying on EDIFACT costs $20-$22 USD per booking on the lowest class per cabin
+      and loses access to UltraBasic entirely.
+
+  exitPath:
+    value: export-on-request
+    consumerData:
+      operation: Guest information report
+      url: https://www.westjet.com/en-ca/legal/privacy-policy/privacy-requests
+      status: 200
+      evidence: >-
+        "For a copy of your personal data, please request a Guest information report";
+        deletion via "Request to be Forgotten". The page adds: "WestJet may be
+        required to verbally authenticate these requests. Please anticipate a phone
+        call."
+      machineReadable: false
+      note: >-
+        No format is specified, no schema is published, no endpoint exists. This is a
+        PIPEDA-style access right implemented as a web form plus a phone call, not
+        data portability in any engineering sense.
+    agencyData:
+      bulkExport: none
+      note: >-
+        No export, dump, bulk or reporting operation is documented anywhere on
+        westjetndc.com, westjettravelagents.com or WestJet Agent Direct. Agency
+        financial records exist in BSPLink and ARC Memo Manager — which are IATA and
+        ARC systems, not WestJet systems — so what an agency can retrieve about its
+        WestJet transactions it retrieves from the settlement body, not the carrier.
+    orderData:
+      note: >-
+        The capability matrix exposes read operations on a single order ("View issued
+        ticket information", "View issued EMD details", "View all ancillary services
+        included, purchased or still supported within the order") but nothing that
+        enumerates or exports an agency's book of business.
+
+  identifierPortability:
+    summary: >-
+      Predominantly shared industry identifiers, with one meaningful proprietary
+      layer in fare encoding.
+    portableIdentifiers:
+      - IATA airline designator WS (ICAO WJA)
+      - IATA 838 ticket stock / airline accounting code
+      - PNR record locators (matrix row "Split/divide PNR"; "How to claim a WestJet Groups PNR")
+      - Electronic ticket numbers and EMD-A documents for bags and pre-reserved seats
+      - IATA airport codes throughout (YYC, YVR, YXX, YYZ, YHM appear in the ticketing policy)
+      - IATA accreditation numbers, ARC numbers, ARC VTC, IATA TSI and IATA TIDS numbers
+      - Redress Control Number (13-digit DHS identifier) and TSA Secure Flight Passenger Data
+      - Special Service Request (SSR) and Other Service Information (OSI) codes
+      - ATPCO fare categories (CAT 31 exchanges, CAT 33 refunds)
+    proprietaryIdentifiers:
+      - >-
+        Fare basis bundle encoding — the seventh character of the fare basis code
+        denotes the WestJet bundle, and the first character may or may not match the
+        booking class depending on bundle. This is WestJet-authored semantics carried
+        inside an industry-standard field.
+      - WestJet waiver codes for voluntary and involuntary exchanges
+      - WestJet Rewards member IDs and WestJet dollars balances
+      - Accelya/Farelogix-issued Direct Connect enrolment credentials
+    evidence: >-
+      ticketing policy definitions block; adm-fee-schedule "Value Calculation Details"
+      table; westjetndc.com/capabilities/ matrix rows; how-to-identify-westjet-fare-
+      bundles-in-the-gds.
+    note: >-
+      Because the identifiers are mostly IATA's, a booking made through WestJet is
+      addressable by another system. That is a genuine anti-lock-in property and it
+      exists because the industry, not WestJet, owns the namespace.
+
+  contractualLockIn:
+    published: true
+    primaryDocument: https://westjettravelagents.com/policy-library/ticketing-policy/
+    verbatim:
+      - clause: Unilateral amendment
+        text: >-
+          "1.02 Any Booking or Ticketing of air transportation operated and/or
+          marketed by WestJet by an Agent (as defined herein) shall be subject to the
+          terms and conditions of this Policy, as the same may be amended from time to
+          time by WestJet in its sole discretion."
+        source: https://westjettravelagents.com/policy-library/ticketing-policy/
+      - clause: Canadian OTA exclusivity / full-content style requirement
+        text: >-
+          "Online Travel Agencies located in Canada must have a sales incentive
+          contract directly with WestJet or Book and Ticket through an Official
+          WestJet Online Redistributor. Any OTA who does not have a sales contract
+          with WestJet or Book and Ticket through an Official WestJet Online
+          Redistributor will have their ability to Book and/or Ticket suspended
+          and/or terminated and/or be liable for ADMs until they are in compliance
+          with this policy."
+        source: https://westjettravelagents.com/policy-library/ticketing-policy/
+        note: >-
+          This is the sharpest lock-in clause found. A Canadian OTA cannot simply
+          integrate; it must hold a WestJet contract or route through a WestJet-
+          designated redistributor, on pain of suspension.
+      - clause: Accreditation as the definition of an eligible counterparty
+        text: >-
+          "'Accredited Agency' means an Agency approved by ARC or IATA to issue
+          Airline Traffic Documents." … "'Non-Accredited Agency' means any
+          entity/person, without ARC or IATA accreditation, who makes a Booking or
+          otherwise issues Tickets, and for avoidance of doubt, will be deemed to
+          include any travel agency whose bookings do not contain a valid ARC/IATA
+          number of an Accredited Agency in the PNR point of sale information."
+        source: https://westjettravelagents.com/policy-library/ticketing-policy/
+      - clause: Interline restriction on 838 stock
+        text: >-
+          "4.12 Interline Ticketing – The Agent must not validate any Ticket on 838
+          Ticket Stock if the Ticket contains a flight segment(s) on any other airline
+          unless the other airline has a ticketing and baggage agreement with WestJet."
+        source: https://westjettravelagents.com/policy-library/ticketing-policy/
+      - clause: ADM issuance without floor
+        text: >-
+          "Minimum Amount — WestJet reserves the right to raise an ADM without
+          limitation of minimum value." … "Timing — WestJet will raise and release ADMs
+          no later than 9 months after transaction occurrence."
+        source: https://westjettravelagents.com/policy-library/adm-policy/
+      - clause: Dispute window
+        text: >-
+          "ADM disputes -Must be initiated during the pre-billing period (15 days from
+          issue)" (BSPLink, Canadian and international agencies); "ADM disputes -Should
+          be initiated within the first 15 days from issue" (ARC Memo Manager, U.S.
+          agencies).
+        source: https://westjettravelagents.com/policy-library/adm-policy/
+      - clause: ADM administrative fees
+        text: >-
+          "Booking and inventory abuse — A charge of 10 CAD/USD will apply per
+          incident, apart from churning violations which will apply per incident after
+          the fourth churn in addition to the administration fee. 50 CAD/USD." …
+          "Dual CRS — Administrative fee only. 50 CAD/USD." … "Group booking —
+          Administrative fee only. 150 CAD/USD." … "Ticket validity … 150 CAD/USD."
+        source: https://westjettravelagents.com/policy-library/adm-fee-schedule/
+        note: >-
+          The "Dual CRS" line item is a distribution-behaviour penalty: booking the
+          same business through two reservation systems is itself a chargeable
+          violation.
+      - clause: Reinstatement after loss of ticketing authority
+        text: >-
+          "Ticketing Authority Reinstatement — Reinstatement will require back payment
+          of any returned ADMs plus NSF fee of $50CAD/USD per instance along with a
+          letter from IATA showing agency i[n good standing]"
+        source: https://westjettravelagents.com/policy-library/adm-fee-schedule/
+        note: Text truncated in the rendered page at the point quoted.
+      - clause: Website terms — revocation at will
+        text: >-
+          "WestJet, in its absolute discretion, will be the sole judge of whether you
+          have breached any provision of this Agreement and that any privileges or
+          permission granted to you as an individual under this Agreement may be
+          revoked, suspended or terminated by WestJet at any time without notice." …
+          "WestJet may terminate this Agreement at any time with or without notice to
+          you in its absolute discretion."
+        source: https://www.westjet.com/en-ca/legal/terms-use
+    notPublished:
+      - Minimum term or committed volume for a Direct Connect agreement
+      - Termination notice period for the Direct Connect or sales incentive contract
+      - The NDC incentive schedule (stated to exist; values not published)
+      - Full-content agreement text with any GDS
+      - Any SLA or rate-limit commitment for the Direct Connect API
+    note: >-
+      Everything above is prose in public trade policy, not machine-readable terms.
+      Nothing in the commercial agreement itself — the sales incentive contract that a
+      Canadian OTA is required to hold — is published, and it is not inferred here.
+
+  distributionModel:
+    value: gds-intermediated
+    asOfDate: '2026-07-28'
+    reasoning: >-
+      At the review date WestJet's live agency distribution is EDIFACT through
+      Amadeus, Sabre and Travelport, plus its own direct agency web channel. NDC is
+      documented and enrolling but not yet rolled out — the FAQ states "We intend to
+      roll out NDC in Q4 of 2026." The model is therefore GDS-intermediated today with
+      an ndc-direct posture in flight.
+    channels:
+      - name: WestJet Direct Connect API
+        type: ndc-direct
+        status: enrolling, pre-launch
+      - name: WestJet portal (Accelya SPRK 17.2)
+        type: ndc-direct-ui
+        status: enrolling, pre-launch
+      - name: Amadeus / Sabre / Travelport
+        type: gds-intermediated
+        status: live on EDIFACT; NDC largely marked Q3 2026 in the capability matrix
+      - name: Travelfusion
+        type: aggregator-reseller
+        status: named technology partner, NDC 17.2
+      - name: WestJet Agent Direct
+        type: direct-only
+        status: live; agency web app, no API
+      - name: westjet.com and mobile app
+        type: direct-only
+        status: live; no public consumer API
+
+  ndcPosture:
+    certification:
+      level: 'Level 2'
+      grantedDate: '2017-03-22'
+      announcedDate: '2017-05-01'
+      evidence: >-
+        WestJet newsroom: "On 22/03/2017, WestJet Airlines was granted 'NDC
+        Certification' Level 2 status".
+      source: https://westjet.mediaroom.com/2017-05-01-WestJet-receives-IATA-NDC-certification
+      note: >-
+        No higher certification level is claimed on westjetndc.com or in any WestJet
+        release found. Level 3 or Level 4 status is NOT asserted here.
+    apiPublished: true
+    apiPubliclyDocumented: partial
+    apiPubliclyCallable: false
+    schemaVersions:
+      - '17.2'
+      - 21.3/24.1
+    platform: Accelya FLX / Farelogix (SPRK 17.2 for the UI channel)
+    plannedRollout: Q4 2026
+    plannedRolloutEvidence: >-
+      westjetndc.com/faq/: "We intend to roll out NDC in Q4 of 2026. Once live, we
+      will have NDC connectivity with the three largest GDS platforms WestJet works
+      with today (Amadeus, Sabre and Travelport), aggregators like TravelFusion and a
+      direct connect option."
+    gdsSurcharge:
+      exists: true
+      name: Distribution Cost Recovery (DCR) fee
+      amount: $20-$22 USD
+      scope: >-
+        "The DCR surcharge will only apply to non-NDC bookings on the lowest class per
+        cabin, ranging from $20-$22 USD." Applies "in markets where NDC content is
+        available."
+      source: https://westjetndc.com/benefits/
+    contentDifferentiation:
+      exists: true
+      evidence: >-
+        FAQ: "Once NDC launches, modernized pricing and all fare classes will be
+        delivered through NDC-enabled channels. Specifically, UltraBasic fares will be
+        exclusively available through NDC channels."
+      benefitsMatrix: >-
+        The EDIFACT/GDS column omits UltraBasic and marks "Modernized pricing" as
+        "Not available", while the three NDC columns carry all seven fare bundles.
+    pointsOfSale:
+      ndc:
+        - CA
+        - US
+        - UK
+        - MX
+      edifact:
+        - CA
+        - US
+        - UK
+        - MX
+        - AU
+        - BM
+        - DE
+        - DK
+        - ES
+        - FR
+        - IE
+        - IT
+        - JP
+        - KR
+        - NL
+        - PA
+        - PT
+      source: https://westjetndc.com/benefits/
+    incentives:
+      exists: true
+      published: false
+      evidence: >-
+        FAQ: "Travel partners who integrate with WestJet's Direct Connect API will be
+        eligible for incentives at launch." Values are not published.
+
+  accessGate:
+    value: accredited-or-licensed
+    selfServe: false
+    whatADeveloperMustDo:
+      - >-
+        Hold an IATA or ARC accreditation number. The Direct Connect registration form
+        requires "Accreditation Type * — IATA / ARC / TIDS" and an "Accreditation
+        Number *", and states plainly: "This form is only for Direct Connect API
+        development, which does not support TIDS."
+      - >-
+        Declare a "Business Type" from a fixed list (Consolidator, Corporate Booking
+        Tool, Metasearch Tool, Online Booking Tool, Online Travel Agency, Technology
+        Provider, Tour Operator, Travel Agency).
+      - >-
+        Declare "Estimated Annual WestJet Sales Volume" — the form deflects
+        "Less than $1M annually" with "Please consider connecting through a GDS or
+        aggregator instead."
+      - >-
+        Declare the percentage of that volume expected to flow through the Direct
+        Connect API, prior NDC implementation experience, and whether the applicant has
+        completed a prior Accelya connection.
+      - >-
+        Request points of sale from CA, US, MX, UK only — "At this time, WestJet
+        currently only supports Canada, US, Mexico and UK points of sale."
+      - >-
+        Wait for outreach: "A member of our team will contact you with further details
+        on your registration." No credentials, sandbox, key or spec is issued on
+        submission.
+      - >-
+        A Canadian OTA must additionally hold a WestJet sales incentive contract or
+        ticket through an Official WestJet Online Redistributor.
+      - >-
+        For the non-API agency channel (WestJet Agent Direct), supply an
+        "IATA / TIDS / ARC Number" and wait: "Your agency is now registered for WestJet
+        Agent Direct. In the next 5 to 10 business days, you will receive an email with
+        a link to access your agency's profile."
+    sources:
+      - https://westjetndc.com/direct-connect/
+      - https://westjetagentdirect.westjet.com/registeragency.html
+      - https://westjettravelagents.com/policy-library/ticketing-policy/
+
+  consumerVsDistributionSurfaces:
+    consumer:
+      publicAPI: false
+      note: >-
+        Flight status, check-in, manage-trips, seat selection and WestJet Rewards are
+        web and mobile-app only. westjet.com/llms.txt enumerates every guest journey as
+        an HTML deep link; none is an API. No public flight-status, schedule or loyalty
+        endpoint is documented. A .well-known/apple-app-site-association exists for
+        mobile deep linking, which is not an API contract.
+    distribution:
+      publicAPI: true
+      publiclyCallable: false
+      note: >-
+        The WestJet Direct Connect NDC API is the only real API surface, and it is
+        accreditation-gated with no published spec or base URL.
+    cargo:
+      publicAPI: false
+      note: >-
+        westjetcargo.com publishes quote, track and claim web forms; tracking is
+        delegated to the third-party SmartKargo platform at westjet.smartkargo.com. No
+        cargo API, no IATA ONE Record reference found.
+    lowCostCarrierContext: >-
+      WestJet began as a low-cost carrier that historically leaned on direct sales, and
+      the current posture still reads that way: it is building its NDC channel to pull
+      volume back from the GDS, gating its cheapest fare bundle (UltraBasic) to direct
+      and NDC channels, and pricing the GDS channel up by $20-$22 USD per booking. This
+      is the same structural move that easyJet, Jet2, Jetstar and Southwest made by
+      bypassing the GDS outright — the difference is that WestJet is doing it through
+      IATA's standard rather than around it.
+
+sources:
+  - url: https://www.westjet.com/llms.txt
+    type: LLMsTxt
+    fetched: '2026-07-28'
+    status: 200
+    note: Company self-description, scale claims, and the pointer to westjettravelagents.com and westjetbusinesstravel.com
+  - url: https://westjetndc.com/
+    type: Portal
+    fetched: '2026-07-28'
+    status: 200
+    note: The NDC hub — the only developer-facing surface WestJet publishes
+  - url: https://westjetndc.com/connection-options/
+    type: Documentation
+    fetched: '2026-07-28'
+    status: 200
+    note: Names the Direct Connect API, SPRK portal and technology-partner channels
+  - url: https://westjetndc.com/capabilities/
+    type: Documentation
+    fetched: '2026-07-28'
+    status: 200
+    note: Per-channel capability matrix, last updated July 15, 2026
+  - url: https://westjetndc.com/benefits/
+    type: Documentation
+    fetched: '2026-07-28'
+    status: 200
+    note: Benefits matrix — DCR surcharge, fare bundles, points of sale
+  - url: https://westjetndc.com/faq/
+    type: Documentation
+    fetched: '2026-07-28'
+    status: 200
+    note: Q4 2026 rollout, EDIFACT surcharge, UltraBasic exclusivity, incentives. Last updated June 10, 2026
+  - url: https://westjetndc.com/direct-connect/
+    type: Signup
+    fetched: '2026-07-28'
+    status: 200
+    note: Accreditation-gated registration form; the definitive access-gate evidence
+  - url: https://westjetndc.com/technical-support/
+    type: Support
+    fetched: '2026-07-28'
+    status: 200
+    note: Routes Direct Connect users to Accelya Zendesk and Accelya statuspage
+  - url: https://westjettravelagents.com/policy-library/ticketing-policy/
+    type: TermsOfService
+    fetched: '2026-07-28'
+    status: 200
+    note: Booking and Ticketing Policy — definitions, OTA contract requirement, 838 stock rules
+  - url: https://westjettravelagents.com/policy-library/adm-policy/
+    type: Policy
+    fetched: '2026-07-28'
+    status: 200
+    note: IATA Resolution 824 / 850m, 9-month ADM window, 15-day dispute window, BSPLink and ARC routing
+  - url: https://westjettravelagents.com/policy-library/adm-fee-schedule/
+    type: Policy
+    fetched: '2026-07-28'
+    status: 200
+    note: ADM administrative fees including the Dual CRS line item
+  - url: https://westjettravelagents.com/policy-library/how-to-identify-westjet-fare-bundles-in-the-gds/
+    type: Documentation
+    fetched: '2026-07-28'
+    status: 200
+    note: The proprietary seventh-character fare-basis bundle encoding
+  - url: https://westjetagentdirect.westjet.com/registeragency.html
+    type: Signup
+    fetched: '2026-07-28'
+    status: 200
+    note: '"IATA / TIDS / ARC Number" required; 5-10 business day approval'
+  - url: https://www.westjet.com/en-ca/legal/privacy-policy/privacy-requests
+    type: DataPortability
+    fetched: '2026-07-28'
+    status: 200
+    note: Guest information report; verbal authentication; no machine-readable format
+  - url: https://www.westjet.com/en-ca/legal/terms-use
+    type: TermsOfService
+    fetched: '2026-07-28'
+    status: 200
+    note: Revocation and termination at WestJet's absolute discretion, without notice
+  - url: https://westjet.mediaroom.com/2017-05-01-WestJet-receives-IATA-NDC-certification
+    type: PressRelease
+    fetched: '2026-07-28'
+    status: 200
+    note: NDC Certification Level 2, granted 22 March 2017
+  - url: https://w3.accelya.com/resources/press-releases/westjet-modern-retail-transformation/
+    type: PressRelease
+    fetched: '2026-07-28'
+    status: 200
+    note: 22 July 2024 — multi-year FLX Platform agreement between WestJet and Accelya
+  - url: https://www.westjet.com/robots.txt
+    type: Robots
+    fetched: '2026-07-28'
+    status: 200
+  - url: https://www.westjet.com/sitemap.xml
+    type: Sitemap
+    fetched: '2026-07-28'
+    status: 200
+
+actions:
+  apisYmlCreated: true
+  apisListed: 1
+  openapiDirectoryCreated: false
+  openapiReason: >-
+    No machine-readable contract of any kind was found. WestJet publishes no OpenAPI,
+    Swagger, WSDL, XSD, JSON Schema, Postman collection or AsyncAPI. The NDC schemas
+    themselves are IATA artifacts distributed by IATA under its own terms, not by
+    WestJet, so nothing was harvested. Creating an openapi/ directory would have meant
+    fabricating one.
+  gated: true
+  portalConfirmed: false
+  portalConfirmedReason: >-
+    westjetndc.com returns HTTP 200 and is genuinely public documentation, but it is
+    not a self-serve developer portal: there is no signup that issues credentials, no
+    sandbox, no key, no spec and no console. Every path to the API runs through an
+    accreditation check and a human.
