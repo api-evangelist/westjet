@@ -22,6 +22,17 @@ description: >-
   review. There is no bulk export for agency or booking data; guest data comes
   out only via a verbally authenticated PIPEDA-style "Guest information report"
   request.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.westjet.com/favicon.ico
 tags:
 - Travel
