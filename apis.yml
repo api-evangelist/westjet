@@ -50,6 +50,16 @@ tags:
 - Travel
 - Canada
 - Aviation
+- Airlines
+- Distribution
+- NDC
+- Booking
+- Cargo
+- Loyalty
+tags_raw:
+- Travel
+- Canada
+- Aviation
 - Airline
 - Distribution
 - NDC
@@ -79,6 +89,12 @@ apis:
     points of sale.
   humanURL: https://westjetndc.com/connection-options/
   tags:
+  - NDC
+  - Distribution
+  - Airlines
+  - Booking
+  - Travel
+  tags_raw:
   - NDC
   - Distribution
   - Airline
